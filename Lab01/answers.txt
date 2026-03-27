@@ -1,0 +1,16 @@
+LAB 01 REPORT - WEEK 5
+Full Name: Trần Quang Trung
+Student ID: 202417209
+Class ID: 761925
+Date: March 27, 2026
+
+Exercise 6.1.
+- Question: What happens if users choose "Cancel"?
+- Answer: The showConfirmDialog method returns the integer value 2 (JOptionPane.CANCEL_OPTION).
+
+- Question: How to customize the options to users (e.g., only "Yes" and "No")?
+- Answer: We can use the showConfirmDialog method with the "optionType" parameter set to JOptionPane.YES_NO_OPTION. For full customization (like "I do" and "I don't"), we should use JOptionPane.showOptionDialog.
+
+2. Completed Tasks in Lab01:
+- 2.2.5 (Calculate), 2.2.6 (EquationSolver)
+- Exercises: 6.1 to 6.6

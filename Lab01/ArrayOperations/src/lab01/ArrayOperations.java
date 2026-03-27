@@ -7,23 +7,27 @@ public class ArrayOperations {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        System.out.print("Nhập số lượng phần tử của mảng: ");
+        // Input array size
+        System.out.print("Enter the number of elements in the array: ");
         int n = sc.nextInt();
         double[] arr = new double[n];
         double sum = 0;
         
-        System.out.println("Nhập các phần tử:");
+        // Input each element and calculate sum simultaneously
+        System.out.println("Enter the elements:");
         for (int i = 0; i < n; i++) {
-            System.out.print("Phần tử thứ " + (i + 1) + ": ");
+            System.out.print("Element " + (i + 1) + ": ");
             arr[i] = sc.nextDouble();
             sum += arr[i];
         }
         
+        // Sort the array in ascending order
         Arrays.sort(arr);
         
-        System.out.println("Mảng sau khi sắp xếp: " + Arrays.toString(arr));
-        System.out.println("Tổng các phần tử: " + sum);
-        System.out.println("Trung bình cộng: " + (sum / n));
+        // Display the results
+        System.out.println("Sorted array: " + Arrays.toString(arr));
+        System.out.println("Sum of elements: " + sum);
+        System.out.println("Average: " + (sum / n));
         
         sc.close();
     }

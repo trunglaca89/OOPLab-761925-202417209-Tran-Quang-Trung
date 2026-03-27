@@ -1,4 +1,5 @@
 package lab01;
+
 import java.util.Scanner;
 
 public class DaysInMonth {
@@ -7,26 +8,26 @@ public class DaysInMonth {
         int year;
         String month;
 
-        // 1. Nhap ve kiem tra nam (so khong am)
+        // 1. Input and validate the year (non-negative integer)
         while (true) {
-            System.out.print("Nhập năm (vd: 1999): ");
+            System.out.print("Enter the year");
             if (keyboard.hasNextInt()) {
                 year = keyboard.nextInt();
-                if (year >= 0) break; // 
+                if (year >= 0) break; 
             } else {
-                keyboard.next(); //
+                keyboard.next(); // Clear invalid input
             }
-            System.out.println("Năm không hợp lệ. Vui lòng nhập lại số nguyên không âm!");
+            System.out.println("Invalid year. Please enter a non-negative integer!");
         }
 
-        // 2. Nhap va kiem tra thang
+        // 2. Input and validate the month
         int days = 0;
         while (days == 0) {
-            System.out.print("Nhập tháng (Tên, viết tắt hoặc số): ");
-            month = keyboard.next().toLowerCase(); // Chuyen het ve chu thuong
+            System.out.print("Enter the month (Full name, abbreviation, or number): ");
+            month = keyboard.next().toLowerCase(); // Convert to lowercase for uniform checking
 
             switch (month) {
-                // Nhom cac thang co 31 ngày
+                // Months with 31 days
                 case "january": case "jan.": case "jan": case "1":
                 case "march": case "mar.": case "mar": case "3":
                 case "may": case "5":
@@ -37,7 +38,7 @@ public class DaysInMonth {
                     days = 31;
                     break;
                 
-                // Nhom cac thang co 30 ngay
+                // Months with 30 days
                 case "april": case "apr.": case "apr": case "4":
                 case "june": case "jun": case "6":
                 case "september": case "sept.": case "sep": case "9":
@@ -45,9 +46,9 @@ public class DaysInMonth {
                     days = 30;
                     break;
 
-                // Thang 2
+                // February
                 case "february": case "feb.": case "feb": case "2":
-                    // Kiểm tra năm nhuận
+                    // Leap year check logic
                     if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
                         days = 29;
                     } else {
@@ -56,12 +57,12 @@ public class DaysInMonth {
                     break;
 
                 default:
-                    System.out.println("Tháng không hợp lệ. Vui lòng nhập lại!");
+                    System.out.println("Invalid month format. Please try again!");
             }
         }
 
-        // 3. In ket qua
-        System.out.println("Số ngày trong tháng là: " + days);
+        // 3. Display the result
+        System.out.println("Number of days: " + days);
         keyboard.close();
     }
 }

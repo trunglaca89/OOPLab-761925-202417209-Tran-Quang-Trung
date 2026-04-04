@@ -1,10 +1,9 @@
 package Aims;
 
 public class DigitalVideoDisc {
-    // Biến static (Class member) để đếm số lượng đĩa đã tạo
+    // đếm số lượng đĩa đã tạo
     private static int nbDigitalVideoDiscs = 0;
     
-    // Biến instance (Object member) làm ID duy nhất
     private int id;
     
     private String title;

@@ -14,18 +14,32 @@ public class Aims {
 
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
         anOrder.addDigitalVideoDisc(dvd3);
+        
+        // 3. Thêm một danh sách đĩa vào giỏ
+        DigitalVideoDisc[] dvdList = {
+            new DigitalVideoDisc("Cinderella", "Animation", 15.5f),
+            new DigitalVideoDisc("The Jungle", "Adventure", 20.0f)
+        };
+        System.out.println("\n--- Testing Overloading: Add by Array ---");
+        anOrder.addDigitalVideoDisc(dvdList);
 
-        // 3. In ra danh sách chi tiết và tổng tiền hiện tại để kiểm tra
+        // 4. Thêm trực tiếp 2 đĩa vào giỏ
+        DigitalVideoDisc dvd4 = new DigitalVideoDisc("Avatar", "Science Fiction", 25.0f);
+        DigitalVideoDisc dvd5 = new DigitalVideoDisc("Titanic", "Romance", 22.0f);
+        System.out.println("\n--- Testing Overloading: Add 2 DVDs ---");
+        anOrder.addDigitalVideoDisc(dvd4, dvd5);
+        
+        // 5. In ra danh sách chi tiết và tổng tiền hiện tại để kiểm tra
         System.out.println("Current Cart:");
         anOrder.printCart();
         
         System.out.println("Total Cost is: ");
         System.out.println(anOrder.totalCost());
 
-        // 4. Thử xóa một đĩa ra khỏi giỏ hàng
+        // 6. Thử xóa một đĩa ra khỏi giỏ hàng
         anOrder.removeDigitalVideoDisc(dvd2);
         
-        // 5. In lại danh sách mới và tổng tiền xem đã trừ đúng chưa
+        // 7. In lại danh sách mới và tổng tiền xem đã trừ đúng chưa
         System.out.println("Cart after removal:");
         anOrder.printCart();
         

@@ -1,6 +1,7 @@
 package Aims;
 
 public class DigitalVideoDisc {
+	
     // đếm số lượng đĩa đã tạo
     private static int nbDigitalVideoDiscs = 0;
     

@@ -21,7 +21,7 @@ public class DigitalVideoDisc {
     }
 
     // Constructor 2: Tạo bằng Category, Title, Cost
-    public DigitalVideoDisc(String category, String title, float cost) {
+    public DigitalVideoDisc(String title, String category, float cost) {
         this.category = category;
         this.title = title;
         this.cost = cost;

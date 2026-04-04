@@ -16,6 +16,19 @@ public class Cart {
         }
     }
 
+    // Overloading method 1: Thêm một danh sách đĩa vào giỏ
+    public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+        for (int i = 0; i < dvdList.length; i++) {
+            addDigitalVideoDisc(dvdList[i]);
+        }
+    }
+
+    // Overloading method 2: Thêm trực tiếp 2 đĩa vào giỏ
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        addDigitalVideoDisc(dvd1);
+        addDigitalVideoDisc(dvd2);
+    }
+
     // Hàm xóa đĩa DVD khỏi giỏ
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
         for (int i = 0; i < qtyOrdered; i++) {

@@ -45,5 +45,26 @@ public class Aims {
         
         System.out.println("Total Cost after removal is: ");
         System.out.println(anOrder.totalCost());
+        
+        package Aims;
+
+        public class Aims {
+            public static void main(String[] args) {
+
+                // 8. Test truyền tham số
+                System.out.println("\n--- Testing Passing Parameter ---");
+                DigitalVideoDisc jungleDVD = new DigitalVideoDisc("Jungle");
+                DigitalVideoDisc cinderellaDVD = new DigitalVideoDisc("Cinderella");
+
+                // Thử tráo đổi 2 đĩa (Dùng hàm swap từ class TestPassingParameter)
+                TestPassingParameter.swap(jungleDVD, cinderellaDVD);
+                System.out.println("After swap: jungle dvd title: " + jungleDVD.getTitle());
+                System.out.println("After swap: cinderella dvd title: " + cinderellaDVD.getTitle());
+
+                // Thử đổi tên đĩa
+                TestPassingParameter.changeTitle(jungleDVD, cinderellaDVD.getTitle());
+                System.out.println("After changeTitle: jungle dvd title: " + jungleDVD.getTitle());
+            }
+        }
     }
 }

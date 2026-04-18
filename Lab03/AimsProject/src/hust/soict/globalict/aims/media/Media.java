@@ -35,4 +35,20 @@ public abstract class Media {
 
     public float getCost() { return cost; }
     public void setCost(float cost) { this.cost = cost; }
+
+    // SESSION 15: GHI ĐÈ HÀM EQUALS 
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        // Kiểm tra obj có phải là Media không để tránh lỗi ép kiểu (ClassCastException)
+        if (obj == null || !(obj instanceof Media)) {
+            return false;
+        }
+        // Ép kiểu an toàn
+        Media other = (Media) obj;
+        
+        // Hai Media được coi là giống nhau nếu title giống nhau
+        return this.title != null && this.title.equals(other.getTitle());
+    }
 }

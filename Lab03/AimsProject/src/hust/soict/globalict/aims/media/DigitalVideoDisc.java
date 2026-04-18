@@ -1,65 +1,30 @@
-package Aims;
+package hust.soict.globalict.aims.media;
 
-public class DigitalVideoDisc {
-	
-    // đếm số lượng đĩa đã tạo
+public class DigitalVideoDisc extends Disc implements Playable {
     private static int nbDigitalVideoDiscs = 0;
-    
-    private int id;
-    
-    private String title;
-    private String category;
-    private String director;
-    private int length;
-    private float cost;
 
-    // Constructor 1: Chỉ tạo bằng Title
     public DigitalVideoDisc(String title) {
-        this.title = title;
+        super();
+        this.setTitle(title);
         nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
+        this.setId(nbDigitalVideoDiscs);
     }
 
-    // Constructor 2: Tạo bằng Category, Title, Cost
-    public DigitalVideoDisc(String title, String category, float cost) {
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
-    // Constructor 3: Tạo bằng Director, Category, Title, Cost
-    public DigitalVideoDisc(String director, String category, String title, float cost) {
-        this.director = director;
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
-    // Constructor 4: Tạo bằng tất cả thuộc tính
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        this.title = title;
-        this.category = category;
-        this.director = director;
-        this.length = length;
-        this.cost = cost;
+        super(title, category, director, length, cost);
         nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
+        this.setId(nbDigitalVideoDiscs);
     }
 
-    // Chỉ tạo Getters 
-    public int getId() { return id; }
-    public String getTitle() { return title; }
-    public String getCategory() { return category; }
-    public String getDirector() { return director; }
-    public int getLength() { return length; }
-    public float getCost() { return cost; }
-    
-    // Section 15 yêu cầu thêm hàm setTitle để test Passing Parameter
-    public void setTitle(String title) {
-        this.title = title;
+    // Hiện thực hàm play() cho DVD
+    @Override
+    public void play() {
+        System.out.println("Playing DVD: " + this.getTitle());
+        System.out.println("DVD length: " + this.getLength());
+    }
+
+    @Override
+    public String toString() {
+        return "DVD - " + getTitle() + " - " + getCategory() + " - " + getDirector() + " - " + getLength() + ": " + getCost() + " $";
     }
 }

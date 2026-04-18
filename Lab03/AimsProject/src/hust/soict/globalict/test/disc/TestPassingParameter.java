@@ -1,4 +1,6 @@
-package Aims;
+package hust.soict.globalict.test.disc;
+
+import hust.soict.globalict.aims.disc.DigitalVideoDisc;
 
 public class TestPassingParameter {
     public static void main(String[] args) {
@@ -15,7 +17,7 @@ public class TestPassingParameter {
         System.out.println("jungle dvd title: " + jungleDVD.getTitle());
     }
 
-    // Hàm hoán đổi (thực tế sẽ KHÔNG hoạt động ngoài phạm vi hàm này do Pass-by-value)
+    // Hàm hoán đổi 
     public static void swap(Object o1, Object o2) {
         Object tmp = o1;
         o1 = o2;
@@ -25,7 +27,7 @@ public class TestPassingParameter {
     // Hàm đổi tên
     public static void changeTitle(DigitalVideoDisc dvd, String title) {
         String oldTitle = dvd.getTitle();
-        dvd.setTitle(title); // Dòng này làm thay đổi title thực tế vì nó thao tác trực tiếp vào thuộc tính của object
-        dvd = new DigitalVideoDisc(oldTitle); // Dòng này vô nghĩa bên ngoài hàm
+        dvd.setTitle(title); 
+        dvd = new DigitalVideoDisc(oldTitle);
     }
 }

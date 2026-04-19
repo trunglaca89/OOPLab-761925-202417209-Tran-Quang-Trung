@@ -16,7 +16,6 @@ public class Book extends Media {
         super(title, category, cost); // Đá lên cho Media
     }
 
-    // Các hàm addAuthor và removeAuthor giữ nguyên 
     public void addAuthor(String authorName) {
         if (!authors.contains(authorName)) {
             authors.add(authorName);

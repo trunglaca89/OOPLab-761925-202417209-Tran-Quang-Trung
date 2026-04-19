@@ -1,0 +1,18 @@
+LAB 03 ANSWERS
+
+
+1. What class should implement the Comparable interface?
+
+The Media class should implement the Comparable interface.
+
+2. In those classes, how should you implement the compareTo() method to reflect the ordering that we want?
+
+Sort by title first (alphabetical order). If titles are equal, sort by cost (descending order).
+
+3. Can we have two ordering rules of the item if we use this Comparable interface approach?
+
+No, we cannot. The Comparable interface only allows one default sorting rule because a class can only have one compareTo() method.
+
+4. Suppose the DVDs have a different ordering rule... How would you modify your code to allow this?
+
+We must override the compareTo() method inside the DigitalVideoDisc class to implement this specific rule (title -> decreasing length -> cost).

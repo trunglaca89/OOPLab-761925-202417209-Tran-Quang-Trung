@@ -200,6 +200,7 @@ public class Aims {
                     System.out.println("1. Sort by Title");
                     System.out.println("2. Sort by Cost");
                     int sortChoice = scanner.nextInt();
+                    scanner.nextLine();
                     if (sortChoice == 1) {
                         Collections.sort(cart.getItemsOrdered(), Media.COMPARE_BY_TITLE_COST);
                     } else if (sortChoice == 2) {

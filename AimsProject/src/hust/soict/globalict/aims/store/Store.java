@@ -28,4 +28,28 @@ public class Store {
             System.out.println("The media '" + media.getTitle() + "' was not found in the store.");
         }
     }
-}
+    
+    // Tìm kiếm media trong kho theo tiêu đề 
+    public Media search(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
+        }
+        return null;
+    }
+    
+     // In danh sách các sản phẩm đang có trong kho (Hàm vừa được thêm)
+     public void print() {
+    	 System.out.println("********************STORE********************");
+         System.out.println("Items currently in store:");
+         if (itemsInStore.isEmpty()) {
+             System.out.println("The store is empty!");
+         } else {
+             for (int i = 0; i < itemsInStore.size(); i++) {
+                 System.out.println((i + 1) + ". " + itemsInStore.get(i).toString());
+             }
+         }
+         System.out.println("*********************************************");
+     }
+ }

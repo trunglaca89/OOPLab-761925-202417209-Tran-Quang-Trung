@@ -62,4 +62,13 @@ public class Cart {
             System.out.println("No match found for title: " + title);
         }
     }
+    
+    public ArrayList<Media> getItemsOrdered() {
+        return itemsOrdered;
+    }
+
+    // Dọn giỏ hàng sau khi đặt
+    public void clear() {
+        itemsOrdered.clear();
+    }
 }

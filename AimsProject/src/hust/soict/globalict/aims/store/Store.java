@@ -3,6 +3,8 @@
 package hust.soict.globalict.aims.store;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import hust.soict.globalict.aims.media.Media;
 
 public class Store {
@@ -27,6 +29,10 @@ public class Store {
         } else {
             System.out.println("The media '" + media.getTitle() + "' was not found in the store.");
         }
+    }
+
+    public List<Media> getItemsInStore() {
+        return Collections.unmodifiableList(itemsInStore);
     }
     
     // Tìm kiếm media trong kho theo tiêu đề 

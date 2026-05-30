@@ -3,6 +3,7 @@
 package hust.soict.globalict.aims.cart;
 
 import java.util.ArrayList;
+import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
 
 public class Cart {
@@ -17,6 +18,10 @@ public class Cart {
         } else {
             System.out.println("The media '" + media.getTitle() + "' is already in the cart.");
         }
+    }
+
+    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
+        addMedia(disc);
     }
 
     // Xóa media khỏi giỏ hàng
@@ -61,6 +66,16 @@ public class Cart {
         if (!found) {
             System.out.println("No match found for title: " + title);
         }
+    }
+
+    public void searchById(int id) {
+        for (Media media : itemsOrdered) {
+            if (media.getId() == id) {
+                System.out.println("Found: " + media.toString());
+                return;
+            }
+        }
+        System.out.println("No match found for id: " + id);
     }
     
     public ArrayList<Media> getItemsOrdered() {

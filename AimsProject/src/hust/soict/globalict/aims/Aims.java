@@ -4,7 +4,9 @@ import java.util.Scanner;
 import java.util.Collections;
 import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.*;
+import hust.soict.globalict.aims.screen.manager.StoreManagerScreen;
 import hust.soict.globalict.aims.store.Store;
+import javax.swing.SwingUtilities;
 
 public class Aims {
     static Store store = new Store();
@@ -12,6 +14,31 @@ public class Aims {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        initStore();
+        if (args.length > 0 && args[0].equalsIgnoreCase("console")) {
+            runConsole();
+            return;
+        }
+
+        SwingUtilities.invokeLater(() -> new StoreManagerScreen(store).setVisible(true));
+    }
+
+    private static void initStore() {
+        store.addMedia(new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f));
+        store.addMedia(new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 124, 24.95f));
+        store.addMedia(new DigitalVideoDisc("Aladdin", "Animation", "Ron Clements", 90, 18.99f));
+
+        Book book = new Book("Effective Java", "Programming", 45.50f);
+        book.addAuthor("Joshua Bloch");
+        store.addMedia(book);
+
+        CompactDisc cd = new CompactDisc("Greatest Hits", "Music", "Queen", 10, 20.25f, "Queen");
+        cd.addTrack(new Track("Bohemian Rhapsody", 6));
+        cd.addTrack(new Track("Don't Stop Me Now", 4));
+        store.addMedia(cd);
+    }
+
+    private static void runConsole() {
         int choice = -1;
         while (choice != 0) {
             showMenu();

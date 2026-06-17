@@ -1,8 +1,9 @@
-// LAB 3 SESSION 10.3
+// LAB 3 SESSION 10.3 | LAB05 SESSION 10.4
 
 package hust.soict.globalict.aims.media;
 
 import java.util.ArrayList;
+import hust.soict.globalict.aims.exception.PlayerException;
 
 public class CompactDisc extends Disc implements Playable {
     private String artist;
@@ -46,14 +47,21 @@ public class CompactDisc extends Disc implements Playable {
         return totalLength;
     }
         
-     // CÀI ĐẶT HÀM PLAY CHO CD 
-     @Override
-     public void play() {
-        System.out.println("Playing CD: " + this.getTitle() + " by " + this.getArtist());
-        System.out.println("CD total length: " + this.getLength());
-        // Lặp qua từng track và gọi hàm play() của từng cái
-        for (Track track : tracks) {
-            track.play(); 
+    @Override
+    public void play() throws PlayerException {
+        if (this.getLength() > 0) {
+            System.out.println("Playing CD: " + this.getTitle() + " by " + this.getArtist());
+            System.out.println("CD total length: " + this.getLength());
+            for (Track track : tracks) {
+                try {
+                    track.play();
+                } catch (PlayerException e) {
+                    throw e;
+                }
+            }
+        } else {
+            System.err.println("ERROR: CD length is non-positive!");
+            throw new PlayerException("ERROR: CD '" + this.getTitle() + "' length is non-positive!");
         }
     }
      

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="hust.soict.globalict.aims.screen.customer.controller.ItemController"
+            style="-fx-border-color: #cccccc; -fx-border-width: 1; -fx-background-color: white;">
+    <VBox alignment="CENTER" prefWidth="305" prefHeight="175"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <Label fx:id="lblTitle" text="Title" alignment="CENTER"
+               prefWidth="305" prefHeight="50"
+               style="-fx-font-weight: bold; -fx-wrap-text: true;"/>
+        <Label fx:id="lblCost" text="0.00 $" alignment="CENTER"
+               prefWidth="305" prefHeight="50"
+               style="-fx-text-fill: #cc6600;"/>
+        <HBox alignment="CENTER" prefWidth="305" prefHeight="50" spacing="20">
+            <Button fx:id="btnAddToCart" text="Add to Cart" onAction="#btnAddToCartClicked"
+                    prefWidth="130" prefHeight="50"/>
+            <Button fx:id="btnPlay" text="Play" onAction="#btnPlayClicked"
+                    prefWidth="130" prefHeight="50"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

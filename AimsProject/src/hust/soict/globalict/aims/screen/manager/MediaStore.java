@@ -1,5 +1,6 @@
 package hust.soict.globalict.aims.screen.manager;
 
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Playable;
 import hust.soict.globalict.aims.store.Store;
@@ -31,7 +32,13 @@ public class MediaStore extends JPanel {
 
         if (media instanceof Playable playable) {
             JButton playButton = new JButton("Play");
-            playButton.addActionListener(event -> playable.play());
+            playButton.addActionListener(event -> {
+                try {
+                    playable.play();
+                } catch (PlayerException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage(), "Play Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
             buttonPanel.add(playButton);
         }
 

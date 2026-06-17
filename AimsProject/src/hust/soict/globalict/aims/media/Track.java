@@ -1,6 +1,8 @@
-// LAB 3 SESSION 11
+// LAB 3 SESSION 11 | LAB05 SESSION 10.2
 
 package hust.soict.globalict.aims.media;
+
+import hust.soict.globalict.aims.exception.PlayerException;
 
 public class Track implements Playable {
     private String title;
@@ -14,12 +16,18 @@ public class Track implements Playable {
     public String getTitle() { return title; }
     public int getLength() { return length; }
 
-    // Hiện thực hàm play() cho Track
-    public void play() {
-        System.out.println("Playing track: " + this.getTitle());
-        System.out.println("Track length: " + this.getLength());
+    @Override
+    public void play() throws PlayerException {
+        if (this.getLength() > 0) {
+            System.out.println("Playing track: " + this.getTitle());
+            System.out.println("Track length: " + this.getLength());
+        } else {
+            System.err.println("ERROR: Track length is non-positive!");
+            throw new PlayerException("ERROR: Track '" + this.getTitle() + "' length is non-positive!");
+        }
     }
     
+    @Override
     public boolean equals(Object obj) {     
     	if (this == obj) {
             return true;

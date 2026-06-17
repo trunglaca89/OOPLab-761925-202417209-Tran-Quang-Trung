@@ -1,8 +1,9 @@
 package hust.soict.globalict.aims;
 
 import java.util.Scanner;
-import java.util.Collections;
 import hust.soict.globalict.aims.cart.Cart;
+import hust.soict.globalict.aims.exception.LimitExceededException;
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.*;
 import hust.soict.globalict.aims.screen.manager.StoreManagerScreen;
 import hust.soict.globalict.aims.store.Store;
@@ -43,23 +44,14 @@ public class Aims {
         while (choice != 0) {
             showMenu();
             choice = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             switch (choice) {
-                case 1: 
-                    viewStore(); 
-                    break;
-                case 2: 
-                    updateStore(); 
-                    break;
-                case 3: 
-                    viewCart(); 
-                    break;
-                case 0: 
-                    System.out.println("Goodbye!"); 
-                    break;
-                default: 
-                    System.out.println("Invalid choice!");
+                case 1: viewStore(); break;
+                case 2: updateStore(); break;
+                case 3: viewCart(); break;
+                case 0: System.out.println("Goodbye!"); break;
+                default: System.out.println("Invalid choice!");
             }
         }
     }
@@ -111,13 +103,13 @@ public class Aims {
     }
 
     public static void viewStore() {
-        store.print(); 
+        store.print();
         int choice = -1;
         while (choice != 0) {
             storeMenu();
             choice = scanner.nextInt();
             scanner.nextLine();
-            
+
             if (choice == 1) {
                 seeMediaDetails();
             } else if (choice == 2) {
@@ -140,12 +132,21 @@ public class Aims {
             mediaDetailsMenu();
             int choice = scanner.nextInt();
             scanner.nextLine();
-            
+
             if (choice == 1) {
-                cart.addMedia(media);
+                try {
+                    cart.addMedia(media);
+                } catch (LimitExceededException e) {
+                    System.err.println(e.getMessage());
+                }
             } else if (choice == 2) {
                 if (media instanceof Playable) {
-                    ((Playable) media).play();
+                    try {
+                        ((Playable) media).play();
+                    } catch (PlayerException e) {
+                        System.err.println(e.getMessage());
+                        e.printStackTrace();
+                    }
                 } else {
                     System.out.println("Cannot play this media!");
                 }
@@ -159,17 +160,13 @@ public class Aims {
         System.out.print("Enter title to add to cart: ");
         String title = scanner.nextLine();
         Media media = store.search(title);
-        
+
         if (media != null) {
-            cart.addMedia(media);
-            
-            int dvdCount = 0;
-            for (Media m : cart.getItemsOrdered()) {
-                if (m instanceof DigitalVideoDisc) {
-                    dvdCount++;
-                }
+            try {
+                cart.addMedia(media);
+            } catch (LimitExceededException e) {
+                System.err.println(e.getMessage());
             }
-            System.out.println("Number of DVDs in cart: " + dvdCount);
         } else {
             System.out.println("Not found!");
         }
@@ -179,10 +176,15 @@ public class Aims {
         System.out.print("Enter title to play: ");
         String title = scanner.nextLine();
         Media media = store.search(title);
-        
+
         if (media != null) {
             if (media instanceof Playable) {
-                ((Playable) media).play();
+                try {
+                    ((Playable) media).play();
+                } catch (PlayerException e) {
+                    System.err.println(e.getMessage());
+                    e.printStackTrace();
+                }
             } else {
                 System.out.println("Cannot play this media!");
             }
@@ -196,7 +198,7 @@ public class Aims {
         System.out.println("2. Remove media");
         int choice = scanner.nextInt();
         scanner.nextLine();
-        
+
         if (choice == 1) {
             System.out.println("Feature not yet implemented.");
         } else if (choice == 2) {
@@ -212,30 +214,30 @@ public class Aims {
     }
 
     public static void viewCart() {
-        cart.print(); 
+        cart.print();
         int choice = -1;
         while (choice != 0) {
             cartMenu();
             choice = scanner.nextInt();
             scanner.nextLine();
-            
+
             switch (choice) {
-                case 1: 
-                    System.out.println("Feature not yet implemented."); 
+                case 1:
+                    System.out.println("Feature not yet implemented.");
                     break;
-                case 2: 
+                case 2:
                     System.out.println("1. Sort by Title");
                     System.out.println("2. Sort by Cost");
                     int sortChoice = scanner.nextInt();
                     scanner.nextLine();
                     if (sortChoice == 1) {
-                        Collections.sort(cart.getItemsOrdered(), Media.COMPARE_BY_TITLE_COST);
+                        cart.sortItems(Media.COMPARE_BY_TITLE_COST);
                     } else if (sortChoice == 2) {
-                        Collections.sort(cart.getItemsOrdered(), Media.COMPARE_BY_COST_TITLE);
+                        cart.sortItems(Media.COMPARE_BY_COST_TITLE);
                     }
                     cart.print();
                     break;
-                case 3: 
+                case 3:
                     System.out.print("Enter title to remove: ");
                     String title = scanner.nextLine();
                     Media media = store.search(title);
@@ -245,21 +247,26 @@ public class Aims {
                         System.out.println("Not found!");
                     }
                     break;
-                case 4: 
+                case 4:
                     System.out.print("Enter title to play: ");
                     String playTitle = scanner.nextLine();
                     Media playMedia = store.search(playTitle);
-                    if (playMedia != null && playMedia instanceof Playable) {
-                        ((Playable) playMedia).play();
+                    if (playMedia instanceof Playable) {
+                        try {
+                            ((Playable) playMedia).play();
+                        } catch (PlayerException e) {
+                            System.err.println(e.getMessage());
+                            e.printStackTrace();
+                        }
                     } else {
                         System.out.println("Cannot play!");
                     }
                     break;
-                case 5: 
-                    System.out.println("Order created. Cart is empty.");
-                    cart.clear(); 
+                case 5:
+                    System.out.println("Order placed. Cart cleared.");
+                    cart.clear();
                     break;
-                case 0: 
+                case 0:
                     break;
             }
         }

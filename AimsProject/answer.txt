@@ -1,18 +1,38 @@
-LAB 03 ANSWERS
+LAB 05 ANSWERS
 
 
-1. What class should implement the Comparable interface?
+SECTION 11 - Update the Aims class
 
-The Media class should implement the Comparable interface.
+Question: What happens when you don't update Aims class to catch PlayerException?
 
-2. In those classes, how should you implement the compareTo() method to reflect the ordering that we want?
+Answer:
+Since PlayerException extends Exception, it is a CHECKED exception in Java.
+Java's compiler enforces that every checked exception must be either:
+  (1) caught using a try-catch block, or
+  (2) declared in the method signature with "throws PlayerException".
 
-Sort by title first (alphabetical order). If titles are equal, sort by cost (descending order).
+If the Aims class is not updated and we simply call play() without any handling,
+the compiler will refuse to compile the code and report a compile-time error:
+  "unreported exception PlayerException; must be caught or declared to be thrown"
 
-3. Can we have two ordering rules of the item if we use this Comparable interface approach?
+In contrast, if PlayerException extended RuntimeException instead, it would be an
+unchecked exception and the compiler would not enforce handling - the program would
+compile but could crash at runtime with an unhandled exception stack trace.
 
-No, we cannot. The Comparable interface only allows one default sorting rule because a class can only have one compareTo() method.
 
-4. Suppose the DVDs have a different ordering rule... How would you modify your code to allow this?
+SECTION 14 - Exception Hierarchical Tree
 
-We must override the compareTo() method inside the DigitalVideoDisc class to implement this specific rule (title -> decreasing length -> cost).
+All self-defined exceptions in AimsProject and their inheritance hierarchy:
+
+  java.lang.Exception
+  |
+  +-- PlayerException       (package: hust.soict.globalict.aims.exception)
+  |     Thrown when a media object cannot be played
+  |     (e.g., DigitalVideoDisc, Track, or CompactDisc with length <= 0)
+  |
+  +-- LimitExceededException  (package: hust.soict.globalict.aims.exception)
+        Thrown when the cart already has MAX_NUMBERS_ORDERED (20) items
+        and the user tries to add one more.
+
+Both exceptions are checked exceptions (they extend Exception directly),
+so callers are required by the compiler to handle or declare them.

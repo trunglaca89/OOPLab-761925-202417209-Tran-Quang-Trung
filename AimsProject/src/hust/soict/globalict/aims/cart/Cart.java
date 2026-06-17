@@ -1,30 +1,31 @@
-// LAB03 SESSION 12
+// LAB03 SESSION 12 | LAB05 SESSION 6.3 + 9: ObservableList + LimitExceededException
 
 package hust.soict.globalict.aims.cart;
 
-import java.util.ArrayList;
-import hust.soict.globalict.aims.media.DigitalVideoDisc;
+import java.util.Comparator;
+import hust.soict.globalict.aims.exception.LimitExceededException;
 import hust.soict.globalict.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Cart {
-    // Sử dụng ArrayList để quản lý danh sách Media
-    private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
+    public static final int MAX_NUMBERS_ORDERED = 20;
 
-    // Thêm media vào giỏ hàng 
-    public void addMedia(Media media) {
-        if (!itemsOrdered.contains(media)) {
-            itemsOrdered.add(media);
-            System.out.println("The media '" + media.getTitle() + "' has been added.");
+    private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
+
+    public void addMedia(Media media) throws LimitExceededException {
+        if (itemsOrdered.size() < MAX_NUMBERS_ORDERED) {
+            if (!itemsOrdered.contains(media)) {
+                itemsOrdered.add(media);
+                System.out.println("The media '" + media.getTitle() + "' has been added.");
+            } else {
+                System.out.println("The media '" + media.getTitle() + "' is already in the cart.");
+            }
         } else {
-            System.out.println("The media '" + media.getTitle() + "' is already in the cart.");
+            throw new LimitExceededException("ERROR: The number of media has reached its limit (" + MAX_NUMBERS_ORDERED + ")");
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-        addMedia(disc);
-    }
-
-    // Xóa media khỏi giỏ hàng
     public void removeMedia(Media media) {
         if (itemsOrdered.contains(media)) {
             itemsOrdered.remove(media);
@@ -34,7 +35,6 @@ public class Cart {
         }
     }
 
-    // Tính tổng chi phí 
     public float totalCost() {
         float total = 0;
         for (Media media : itemsOrdered) {
@@ -43,7 +43,6 @@ public class Cart {
         return total;
     }
 
-    // In danh sách giỏ hàng 
     public void print() {
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
@@ -54,7 +53,6 @@ public class Cart {
         System.out.println("***************************************************");
     }
 
-    // Tìm kiếm bằng tiêu đề 
     public void searchByTitle(String title) {
         boolean found = false;
         for (Media media : itemsOrdered) {
@@ -77,12 +75,15 @@ public class Cart {
         }
         System.out.println("No match found for id: " + id);
     }
-    
-    public ArrayList<Media> getItemsOrdered() {
+
+    public ObservableList<Media> getItemsOrdered() {
         return itemsOrdered;
     }
 
-    // Dọn giỏ hàng sau khi đặt
+    public void sortItems(Comparator<Media> comparator) {
+        itemsOrdered.sort(comparator);
+    }
+
     public void clear() {
         itemsOrdered.clear();
     }

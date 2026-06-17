@@ -1,8 +1,9 @@
 package hust.soict.globalict.aims.media;
 
 import java.util.Comparator;
+import java.util.Objects;
 
-public abstract class Media {
+public abstract class Media implements Comparable<Media> {
     private int id;
     private String title;
     private String category;
@@ -37,23 +38,31 @@ public abstract class Media {
     public float getCost() { return cost; }
     public void setCost(float cost) { this.cost = cost; }
 
-    // SESSION 15: GHI ĐÈ HÀM EQUALS 
+    // LAB05 SESSION 12: equals kiểm tra cả title VÀ cost
+    @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        // Kiểm tra obj có phải là Media không để tránh lỗi ép kiểu (ClassCastException)
-        if (obj == null || !(obj instanceof Media)) {
-            return false;
-        }
-        // Ép kiểu an toàn
+        if (this == obj) return true;
+        if (obj == null || !(obj instanceof Media)) return false;
         Media other = (Media) obj;
-        
-        // Hai Media được coi là giống nhau nếu title giống nhau
-        return this.title != null && this.title.equals(other.getTitle());
+        if (this.title == null) return false;
+        return this.title.equals(other.getTitle()) && this.cost == other.getCost();
     }
-    
-    // SESSION 17: COMPARTOR 
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, cost);
+    }
+
+    // LAB05 SESSION 12: compareTo - sắp xếp tự nhiên theo title rồi đến cost
+    @Override
+    public int compareTo(Media other) {
+        if (other == null) throw new NullPointerException("Cannot compare with null");
+        int titleCmp = this.title == null ? -1 : this.title.compareToIgnoreCase(other.getTitle());
+        if (titleCmp != 0) return titleCmp;
+        return Float.compare(other.getCost(), this.cost); // cost descending
+    }
+
+    // SESSION 17: COMPARATOR
     public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
     public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
 }
